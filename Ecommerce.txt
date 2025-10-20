@@ -1,3 +1,5 @@
+For this task Iam going to use MySQL tool for Creating database, tables, update the datas in the database.Tool is fully free..
+
 1. Creating Database for Ecommerce
 	Create Database Ecommerce;
 
@@ -45,3 +47,4 @@ CREATE TABLE payments (
     Payment_status VARCHAR(50),
     FOREIGN KEY (Order_id) REFERENCES orders(Order_id)
 );
+

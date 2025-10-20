@@ -1,0 +1,23 @@
+1. Creating Database for Ecommerce
+	Create Database Ecommerce;
+
+2. Using Ecommerce database to create tables(Customer, Order, Products)
+	 use Ecommerce;
+
+3.Creating tables
+
+#Customers table
+
+	Create table customers(Customer_id int Auto_increment Primary Key,Customer_name varchar(10) Not Null, Phone_no varchar(15), Email varchar(100), Address varchar(100));
+
+#Products table
+
+	Create table Products(Product_id int Auto_iuncrement Primary Key, Product_name Varchar(200) Not Null, Price  Decimal(10,2) Not Null, Stock int not null);
+
+#Orders table
+
+	Create table orders(Order_id int Auto_increment Primary_key, Customer_id int, Product_id int, order_date Date, Quantity int, Foreign Key(Customer_id) Reference Customers(Customer_id), Foreign Key(Product_id) Reference Products(Product_id));
+
+
+
+

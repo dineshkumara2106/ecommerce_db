@@ -1,23 +1,47 @@
 1. Creating Database for Ecommerce
 	Create Database Ecommerce;
 
-2. Using Ecommerce database to create tables(Customer, Order, Products)
+2. Using Ecommerce database to create tables(Customer, Order, Products, Payments)
 	 use Ecommerce;
 
 3.Creating tables
 
-#Customers table
+#-- Customers Table
+CREATE TABLE customers (
+    Customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    Customer_name VARCHAR(100) NOT NULL,
+    Phone_no VARCHAR(15),
+    Email VARCHAR(100) UNIQUE,
+    Address VARCHAR(255)
+);
 
-	Create table customers(Customer_id int Auto_increment Primary Key,Customer_name varchar(10) Not Null, Phone_no varchar(15), Email varchar(100), Address varchar(100));
+#Products Table
+CREATE TABLE products (
+    Product_id INT AUTO_INCREMENT PRIMARY KEY,
+    Product_name VARCHAR(255) NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    Stock INT NOT NULL CHECK (Stock >= 0)
+);
 
-#Products table
+#Orders Table
+CREATE TABLE orders (
+    Order_id INT AUTO_INCREMENT PRIMARY KEY,
+    Customer_id INT,
+    Product_id INT,
+    Order_date DATE,
+    Quantity INT CHECK (Quantity > 0),
+    Order_status VARCHAR(50) DEFAULT 'pending',
+    FOREIGN KEY (Customer_id) REFERENCES customers(Customer_id),
+    FOREIGN KEY (Product_id) REFERENCES products(Product_id)
+);
 
-	Create table Products(Product_id int Auto_iuncrement Primary Key, Product_name Varchar(200) Not Null, Price  Decimal(10,2) Not Null, Stock int not null);
-
-#Orders table
-
-	Create table orders(Order_id int Auto_increment Primary_key, Customer_id int, Product_id int, order_date Date, Quantity int, Foreign Key(Customer_id) Reference Customers(Customer_id), Foreign Key(Product_id) Reference Products(Product_id));
-
-
-
-
+#Payments Table (to track payments)
+CREATE TABLE payments (
+    Payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    Order_id INT,
+    Payment_method VARCHAR(50),
+    Payment_date DATE,
+    Amount DECIMAL(10,2),
+    Payment_status VARCHAR(50),
+    FOREIGN KEY (Order_id) REFERENCES orders(Order_id)
+);
